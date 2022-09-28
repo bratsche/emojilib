@@ -1,13 +1,19 @@
 defmodule Emojilib.MixProject do
   use Mix.Project
 
+  @version "0.1.0"
+  @description "Utility library for converting shortcodes to Emoji"
+
   def project do
     [
       app: :emojilib,
-      version: "0.1.0",
+      version: @version,
+      description: @description,
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      package: package(),
+      source_url: "https://github.com/bratsche/emojilib"
     ]
   end
 
@@ -23,6 +29,15 @@ defmodule Emojilib.MixProject do
     [
       {:httpoison, "~> 1.8.2"},
       {:jason, "~> 1.3"}
+    ]
+  end
+
+  defp package() do
+    [
+      licenses: ["MIT"],
+      links: %{
+        "GitHub" => "https://github.com/bratsche/emojilib"
+      }
     ]
   end
 end
