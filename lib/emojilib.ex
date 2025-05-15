@@ -1,5 +1,5 @@
 defmodule Emojilib do
-  HTTPoison.start()
+  {:ok, _} = Application.ensure_all_started(:req)
 
   @before_compile Emojilib.Fallback
 
@@ -15,13 +15,13 @@ defmodule Emojilib do
   def replace(string) do
     string
     |> String.split(~r/([:])(?:(?=(\\?))\2.)*?\1/, include_captures: true)
-    |> Enum.map(&(swap_with_emoji/1))
+    |> Enum.map(&swap_with_emoji/1)
     |> Enum.join("")
   end
 
   words =
     "https://raw.githubusercontent.com/iamcal/emoji-data/master/emoji.json"
-    |> HTTPoison.get!()
+    |> Req.get!()
     |> Map.get(:body)
     |> Jason.decode!()
     |> Enum.map(fn %{"unified" => unified, "short_names" => short_names} = _entry ->
