@@ -27,7 +27,7 @@ defmodule Emojilib.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:httpoison, "~> 1.8.2"},
+      {:req, "~> 0.5.10"},
       {:jason, "~> 1.3"}
     ]
   end
